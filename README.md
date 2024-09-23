@@ -49,33 +49,9 @@ line parameters.
 
 TODO: This list is a WIP.
 
-
 ## Image
 
 We can consider including the following in the image:
 
 Should we set up from scratch or should we customize LazyVim? TBD...
 
-- NeoVim
-- nvim-treesitter / nvim-treesitter-textobjects
-- Telescope
-- Fzf-lua
-- LSP
-    - nvim-lspconfig
-    - mason
-    - mason-lspconfig.nvim
-    - nvim-cmp
-    - cmp-nvim-lsp
-- TBD: Snippets
-    - cmp-luasnip
-    - luasnip
-- TBD: Linters
-    - nvim-lint / ALE
-- Misc
-    - mini.surround
-    - mini.pairs
-    - todo-comments.nvim
-    - neo-tree.nvim
-- Git
-    - Fugitive
-- Copilot/Copilot Chat (requires different image)
