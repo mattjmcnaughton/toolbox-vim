@@ -1,0 +1,15 @@
+image_name := "tmp"
+username := `id -un`
+cwd := `pwd`
+
+build:
+  docker build -t {{image_name}} .
+
+# Surprising, the volume mount doesn't work properly via podman. The mount
+# permissions are incorrect.
+dev: build
+  docker run --rm -it -v {{cwd}}/.config:/home/{{username}}/.config {{image_name}}
+
+run: build
+  docker run --rm -it {{image_name}}
+
