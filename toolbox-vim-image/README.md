@@ -23,8 +23,10 @@
 - TBD: Snippets
     - cmp-luasnip
     - luasnip
-- TBD: Linters (if necessary)
-    - nvim-lint / ALE
+- Linters/Formatters
+    - nvim-lint (or maybe ALE, but probably not)
+    - formatter.nvim (or maybe neoformat)
+    - nvim-dap/nvim-dap-ui
 - Misc
     - mini.surround
     - mini.pairs
@@ -34,6 +36,7 @@
     - done: Fugitive
 - Copilot/Copilot Chat (requires different image)
 - Obsidian (requires different image)
+- Look at https://github.com/ThePrimeagen/init.lua/blob/master/lazy-lock.json
 
 ## Open questions
 
