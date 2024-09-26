@@ -12,4 +12,3 @@ dev: build
 
 run: build
   docker run --rm -it {{image_name}}
-
