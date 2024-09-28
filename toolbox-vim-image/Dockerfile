@@ -24,6 +24,9 @@ RUN apt install -y git
 # For `telescope-nvim`
 RUN apt install -y cmake fzf ripgrep fd-find
 
+# For mason
+RUN apt install -y curl unzip tar gzip
+
 USER $USERNAME
 WORKDIR /home/$USERNAME
 
@@ -31,5 +34,11 @@ RUN mkdir .config && chown $USERNAME:$USERNAME .config
 RUN mkdir .config/nvim && chown $USERNAME:$USERNAME .config/nvim
 
 COPY --chown=$USERNAME:$USERNAME .config/nvim /home/$USERNAME/.config/nvim
+
+# Need to:
+# Install Golang
+# Run `mason install`
+
+# Run `rustup toolchain install stable-gnu`
 
 RUN nvim --headless "+Lazy! sync" +qa
