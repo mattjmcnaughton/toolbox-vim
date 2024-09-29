@@ -35,10 +35,24 @@ RUN mkdir .config/nvim && chown $USERNAME:$USERNAME .config/nvim
 
 COPY --chown=$USERNAME:$USERNAME .config/nvim /home/$USERNAME/.config/nvim
 
-# Need to:
-# Install Golang
-# Run `mason install`
+# Install rust
+RUN sudo apt install -y rustup
+RUN rustup toolchain install stable-gnu
 
-# Run `rustup toolchain install stable-gnu`
+# Install golang
+RUN sudo apt install -y golang-go
 
+# Install python
+RUN sudo apt install -y python3 python3-pip python3-venv
+
+# Install node
+RUN sudo apt install -y nodejs npm
+
+# Install Lua
+RUN sudo apt install -y luarocks
+
+# Install plugins via Lazy
 RUN nvim --headless "+Lazy! sync" +qa
+
+# Install lsp, linters, formatters, etc... via Mason
+RUN nvim --headless "+MasonInstall lua-language-server gopls prettier ruff ruff-lsp rust-analyzer" +qa
