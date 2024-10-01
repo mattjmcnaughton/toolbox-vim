@@ -1,9 +1,14 @@
-image_name := "tmp"
+image_uri := "docker.io/mattjmcnaughton/toolbox-vim"
+version := "0.0.1"
+image_name := image_uri + ":" + version
 username := `id -un`
 cwd := `pwd`
 
 build:
   docker build -t {{image_name}} .
+
+build-obsidian:
+  docker build --build-arg TOOLBOX_VIM_FORCE_INSTALL_OBSIDIAN=true -t {{image_name}}-obsidian .
 
 # Surprising, the volume mount doesn't work properly via podman. The mount
 # permissions are incorrect.

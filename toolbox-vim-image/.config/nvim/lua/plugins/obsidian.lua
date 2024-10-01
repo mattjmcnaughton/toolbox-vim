@@ -1,21 +1,32 @@
 -- TODO: Determine the best way to get this installed when the time comes...
 
-local vault_dir = os.getenv("OBSIDIAN_VAULT_DIR")
+local force_install_obsidian = os.getenv("TOOLBOX_VIM_FORCE_INSTALL_OBSIDIAN")
+local vault_dir = os.getenv("TOOLBOX_VIM_OBSIDIAN_VAULT_DIR")
 
-if vault_dir ~= nil then
+if force_install_obsidian and vault_dir == nil then
   return {
     "epwalsh/obsidian.nvim",
 
-    lazy = true,
+    dependencies = {
+      "nvim-lua/plenary.nvim",
+    }
+  }
+elseif vault_dir ~= nil then
+  return {
+    "epwalsh/obsidian.nvim",
+
+    lazy = false,
+
+    dependencies = {
+      "nvim-lua/plenary.nvim",
+    },
+
     event = {
       -- TODO: Replace w/ actual path...
       "BufReadPre " .. vault_dir .. "/*.md",
       "BufNewFile " .. vault_dir .. "/*.md",
     },
 
-    dependencies = {
-      "nvim-lua/plenary.nvim",
-    },
 
     opts = {
       workspaces = {

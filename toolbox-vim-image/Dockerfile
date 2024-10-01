@@ -51,6 +51,10 @@ RUN sudo apt install -y nodejs npm
 # Install Lua
 RUN sudo apt install -y luarocks
 
+# Configure whether to include obsidian - move as last as possible to avoid
+# disrupting cacheing.
+ARG TOOLBOX_VIM_FORCE_INSTALL_OBSIDIAN=false
+
 # Install plugins via Lazy
 RUN nvim --headless "+Lazy! sync" +qa
 

@@ -4,6 +4,12 @@
 - done: Obsidian (initial)
 - done: Test airgapped
 - Obsidian "all-in"
+    - done: Install obsidian.nvim and set-up `Justfile` in second-brain.
+    - Setup markdown language server.
+    - Essential obsidian config.
+        - Silencing the warning message.
+        - Ensuring the Today file is opened correctly.
+        - Shortcuts to opening the today file (maybe even on start).
 - Launch "in production"
     - I.e. public image and start w/ the tooling to launch.
 - Key mappings
