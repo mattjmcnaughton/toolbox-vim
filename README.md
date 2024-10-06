@@ -14,7 +14,7 @@ necessary configuration and settings for a seamless experience.
 
 ## Why is this better than using Vim directly?
 
-- Take your vim config with you where you go.
+- Take your vim config (and install) with you where you go.
 - Greater control over the environment in which your text editor executes. Limit
   permissions (i.e. network access, view of the file-system, etc).
 - Easier to experiment w/ different Vim configs (with no concern around leaving
@@ -28,10 +28,11 @@ We recommend specifying `alias vim="toolbox-vim $DEFAULT-PARAMETERS"`.
 
 ### Configuration
 
-The following is a WIP of configuration ideas.
-
 We allow configuration via environment variable, config file, or direct command
 line parameters.
+
+
+The following is a WIP of configuration ideas.
 
 - `--container-runtime=(docker|podman)`
 - `--network-permissions=(none|limited|logged|full)`
@@ -44,14 +45,10 @@ line parameters.
     - By default we use the current user id.
 - `--container-gid-override`
     - By default we use the current user id.
-- `--enable-copilot`
-    - Whether to enable GitHub Copilot.
-
-TODO: This list is a WIP.
+- `--enable-ai`
+    - Whether to enable AI assistants.
 
 ## Image
 
-We can consider including the following in the image:
-
-Should we set up from scratch or should we customize LazyVim? TBD...
-
+- See [toolbox-vim-image](./toolbox-vim-image/README.md) for image
+  configuration.
