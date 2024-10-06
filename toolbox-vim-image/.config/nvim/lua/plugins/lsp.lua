@@ -33,6 +33,7 @@ return {
       ensure_installed = {
         "gopls",
         "lua_ls",
+        "marksman",
         "rust_analyzer",
       },
 
@@ -79,6 +80,7 @@ return {
       formatters_by_ft = {
         lua = { lsp_format = "fallback" },
         go = { "gofmt", lsp_format = "fallback" },
+        markdown = { lsp_format = "fallback" },
       },
       format_on_save = {
         -- Fallback to the lsp
