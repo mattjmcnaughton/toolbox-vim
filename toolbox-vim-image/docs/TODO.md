@@ -27,3 +27,4 @@
         - Better use the plugin.
 - Obisidian / Google Drive integration (or someway to draft in Obsidian and
 selectively push to Google Drive)
+- TBD: Install tmux

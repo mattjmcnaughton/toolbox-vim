@@ -19,22 +19,22 @@
         - We use `nvim-lint` instead of ALE, because nvim-lint is lighterweight.
 - done: Formatters
     - conform.nvim
-- TBD: Debuggers
-    - nvim-dap
-- TBD: Test runners
-    - neotest
-    - vim-test
-- TBD: Tags (i.e. go-to-definition)
 - Misc
     - done: Fugitive
     - mini.surround
     - mini.pairs
     - todo-comments.nvim
     - neo-tree.nvim
-    - pomo.nvim
+    - done: pomo.nvim
     - TBD: fidgit (for use w/ lsp...)
     - TBD: trouble.nvim
 - LLM
     - https://github.com/David-Kunz/gen.nvim
     - Copilot/Copilot Chat (requires different image)
+- TBD: Debuggers
+    - nvim-dap
+- TBD: Test runners
+    - neotest
+    - vim-test
+- TBD: Tags (i.e. go-to-definition)
 - Obsidian (requires different image)
