@@ -7,20 +7,34 @@ For each language, we configure:
 - Defaults (i.e. `ftplugin`)
 - LSP
 - Linter
+    - Only necessary if can't rely on LSP
 - Formatter
+    - Only necessary if can't rely on LSP
 
 ## Languages
 
 ### Priorities
 
 - Python
+    - Defaults: 4 spaces (already the default)
+    - LSP: pyright
+    - Linter: Ruff LSP
+    - Formatter: Ruff LSP
 - Rust
+    - Defaults: 4 spaces
+    - LSP: rust-analyzer
+    - Linter: N/A (use LSP)
+    - Formatter: N/A (falls back to rustfmt)
 - Golang
     - Defaults: 8 tabs
     - LSP: gopls
     - Linter: N/A (use LSP)
     - Formatter: gofmt
 - TypeScript
+    - Defaults: 2 spaces
+    - LSP: typescript_language_server
+    - Linter: eslint (functioning as a language server)
+    - Formatter: prettier
 - Lua
     - Defaults: 2 spaces
     - LSP: lua_ls
@@ -42,8 +56,13 @@ For each language, we configure:
 - CSS/SCSS
 - JavaScript
 - Latex
-- Markdown
 - Erlang/Elixir
 - Lisp
 - Zig
 - Ruby
+
+### No-go
+
+- Markdown
+    - I just don't think there's sufficient roi for a markdown language server,
+      at this moment.

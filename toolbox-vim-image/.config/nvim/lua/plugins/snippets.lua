@@ -4,7 +4,8 @@ return {
 
     build = "make install_jsregexp",
 
-    dependencies = { "rafamadriz/friendly-snippets" },
+    -- We currently do not install rafamadriz/friendly-snippets.
+    -- We may add later.
 
     config = function()
       -- re https://github.com/rafamadriz/friendly-snippets?tab=readme-ov-file#with-lazynvim

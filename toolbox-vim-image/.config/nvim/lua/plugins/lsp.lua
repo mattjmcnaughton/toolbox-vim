@@ -6,7 +6,6 @@ return {
     "williamboman/mason-lspconfig.nvim",
     "hrsh7th/nvim-cmp",
     "hrsh7th/cmp-nvim-lsp",
-    "hrsh7th/cmp-buffer",
     "hrsh7th/cmp-path",
     { "stevearc/conform.nvim", branch = "nvim-0.9" },
     "mfussenegger/nvim-lint",
@@ -31,10 +30,13 @@ return {
       -- We can only include lsp servers in here (i.e. not the full set of linters,
       -- formatters, etc... offered via Mason.
       ensure_installed = {
+        "eslint",
         "gopls",
         "lua_ls",
-        "marksman",
+        "pyright",
+        "ruff_lsp",
         "rust_analyzer",
+        "ts_ls",
       },
 
       handlers = {
@@ -44,7 +46,33 @@ return {
           })
         end,
 
+        -- See https://github.com/astral-sh/ruff-lsp?tab=readme-ov-file#example-neovim
+        ["ruff_lsp"] = function()
+          require("lspconfig").ruff_lsp.setup({
+            on_attach = function(client, _)
+              -- Disable hover for ruff_lsp, in favor of Pyright.
+              client.server_capabilities.hoverProvider = false
+            end
+          })
+        end,
+
         -- can override per lsp -- ["lsp_name"] = function()...
+        ["pyright"] = function()
+          require("lspconfig").pyright.setup({
+            settings = {
+              pyright = {
+                -- Use Ruff's import organizer.
+                disableOrganizeImports = true,
+              },
+              python = {
+                analysis = {
+                  -- Exclusively use Ruff LSP for linting...
+                  ignore = { '*' },
+                },
+              },
+            }
+          })
+        end,
       },
     })
 
@@ -69,8 +97,8 @@ return {
         { name = "nvim_lsp" },
         { name = "luasnip" }, -- for luasnip users.
       }, {
-        { name = "buffer" },  -- text contained within the buffer
         { name = "path" },
+        -- Do not use `cmp-buffer` for now ... maybe consider later.
       }),
     })
 
@@ -80,7 +108,11 @@ return {
       formatters_by_ft = {
         lua = { lsp_format = "fallback" },
         go = { "gofmt", lsp_format = "fallback" },
-        markdown = { lsp_format = "fallback" },
+        python = { lsp_format = "fallback" },
+        javascript = { "prettier", lsp_format = "fallback" },
+        javascriptreact = { "prettier", lsp_format = "fallback" },
+        typescript = { "prettier", lsp_format = "fallback" },
+        typescriptreact = { "prettier", lsp_format = "fallback" },
       },
       format_on_save = {
         -- Fallback to the lsp

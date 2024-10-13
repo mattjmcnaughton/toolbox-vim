@@ -59,4 +59,4 @@ ARG TOOLBOX_VIM_FORCE_INSTALL_OBSIDIAN=false
 RUN nvim --headless "+Lazy! sync" +qa
 
 # Install lsp, linters, formatters, etc... via Mason
-RUN nvim --headless "+MasonInstall lua-language-server marksman gopls rust-analyzer" +qa
+RUN nvim --headless "+MasonInstall lua-language-server gopls pyright ruff-lsp rust-analyzer prettier eslint-lsp typescript-language-server" +qa
