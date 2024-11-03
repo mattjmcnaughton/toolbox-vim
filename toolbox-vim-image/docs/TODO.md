@@ -11,8 +11,10 @@
         - Ensuring the Today file is opened correctly.
         - Shortcuts to opening the today file (maybe even on start).
             - Set the `CMD`.
-- Install remaining language servers (see [language-strategy.md](./docs/language-strategy.md))
+- done: Install remaining language servers for the top-priorities (see [language-strategy.md](./docs/language-strategy.md))
+    - Remainder can be added "ad-hoc".
 - Launch "in production"
+    - "Audit" plugins (document)
     - Split obsidian and non-Obsidian into two separate images
     - I.e. public image and start w/ the tooling to launch.
 - Key mappings
