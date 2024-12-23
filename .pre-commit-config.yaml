@@ -1,0 +1,24 @@
+# See https://pre-commit.com for more information
+# See https://pre-commit.com/hooks.html for more hooks
+repos:
+-   repo: https://github.com/pre-commit/pre-commit-hooks
+    rev: v3.2.0
+    hooks:
+    -   id: trailing-whitespace
+    -   id: end-of-file-fixer
+    -   id: check-yaml
+    -   id: check-added-large-files
+
+-   repo: local
+    hooks:
+    - id: govet
+      name: govet
+      entry: bash -c "go vet ./..."
+      language: system
+      types: [go]
+
+    - id: gofmt
+      name: gofmt
+      entry: bash -c "test -z \"$(gofmt -w $(git diff --cached --name-only --diff-filter=d | grep '\.go$') | tee /dev/stderr)\""
+      language: system
+      types: [go]

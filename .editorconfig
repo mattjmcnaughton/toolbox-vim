@@ -1,0 +1,14 @@
+root = true
+
+[*]
+trim_trailing_whitespace = true
+
+[Justfile]
+indent_style = space
+indent_size = 2
+tab_width = 2
+
+[*.go]
+indent_style = tab
+indent_size = 8
+tab_width = 8

@@ -1,0 +1,27 @@
+#
+# NOTE: When multiple valid values are listed, the first is the default.
+#
+
+container-repo = "docker.io/mattjmcnaughton/toolbox-vim"  # Valid values: Any valid Image URI
+container-tag = "0.0.1"  # Valid values: Any valid container tag.
+
+# container-runtime = podman  # Valid values: (docker|podman)
+# verbosity = info  # Valid values: (debug|info|warn|error) - see https://pkg.go.dev/log/slog@master#Level
+
+# NOTE: Working dir will be set the first (and often only) filesystem mount.
+# filesystem-mount = git # Value values: (cwd|git|home|custom|none)
+# filesystem-mount-custom-paths = ["VALID-PATH-1", "VALID-PATH-2"] # Valid values: List of valid paths.
+
+# TODO: It'll be some work to support anything other than `none` and `full`, so that can be a later feature.
+# network-permissions = full # Valid values: (none|custom-allowlist|custom-denylist|logged|full)
+# network-permissions-custom-denylist = ["URL-1", "URL-2"] # Valid values: List of valid URLs.
+# network-permissions-custom-allowlist = ["URL-1", "URL-2"] # Valid values: List of valid URLs.
+
+# environment-variables = ["KEY-1:VALUE-1", "KEY-2:VALUE-2"...] # Valid values: List of KEY:VALUES. Leave VALUE blank to pass through the host value.
+
+# container-gid-override = 1001  # Valid values: Any valid uid
+# container-uid-override = 1001  # Valid values: Any valid gid
+
+# NOTE: When true, we will override `container-image` and `container-tag` by building the contents
+# of `$TOOLBOX_VIM_CONFIG_DIR/Dockerfile`.
+# auto-discover-custom-dockerfile = false  # Valid values: (false|true)

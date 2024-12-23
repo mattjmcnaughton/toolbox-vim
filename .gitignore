@@ -1,1 +1,5 @@
 *.swp
+.go
+
+toolbox-vim
+.toolbox-vim

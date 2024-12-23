@@ -22,33 +22,14 @@ necessary configuration and settings for a seamless experience.
 
 ## Usage
 
-- `toolbox-vim $FILE`
+See [usage.md](./docs/usage.md).
 
-We recommend specifying `alias vim="toolbox-vim $DEFAULT-PARAMETERS"`.
+### Config
 
-### Configuration
+See [config.md](./docs/config.md).
 
-We allow configuration via environment variable, config file, or direct command
-line parameters.
+## Core toolbox-vim Image
 
+This repo also contains a core toolbox-vim image.
 
-The following is a WIP of configuration ideas.
-
-- `--container-runtime=(docker|podman)`
-- `--network-permissions=(none|limited|logged|full)`
-- `--network-permissions-allowlist=<URLS>`
-    - Only applicable when `--network-permissions=limited`
-- `--filesystem-mount=(cwd|git|home|custom)`
-- `--filesystem-mount-custom-path=PATH`
-    - Only applicable when `--filesystem-mount=custom`
-- `--container-uid-override`
-    - By default we use the current user id.
-- `--container-gid-override`
-    - By default we use the current user id.
-- `--enable-ai`
-    - Whether to enable AI assistants.
-
-## Image
-
-- See [toolbox-vim-image](./toolbox-vim-image/README.md) for image
-  configuration.
+See [core](./contrib/images/core/README.md) for more info.
