@@ -2,7 +2,6 @@ package cmd
 
 import (
 	"fmt"
-	"log"
 	"log/slog"
 	"math/rand/v2"
 	"os"
@@ -10,6 +9,8 @@ import (
 
 	"github.com/spf13/cobra"
 	"github.com/spf13/viper"
+
+	"github.com/mattjmcnaughton/toolbox-vim/pkg/logging"
 )
 
 // runCmd represents the run command
@@ -17,26 +18,28 @@ var runCmd = &cobra.Command{
 	Use:   "run",
 	Short: "Run toolbox-vim!",
 	Long:  `Run a containerized vim based on the configuration values.`,
-	Run:   runCmdRun,
+	RunE: func(cmd *cobra.Command, args []string) error {
+		return runCmdRun(cmd, args, logging.NewCmd("run"))
+	},
+	SilenceUsage:  true,
+	SilenceErrors: true,
 }
 
 func init() {
 	rootCmd.AddCommand(runCmd)
 }
 
-func runCmdRun(_ *cobra.Command, _ []string) {
+func runCmdRun(_ *cobra.Command, _ []string, logger *slog.Logger) error {
 	containerRepo := viper.GetString("container-repo")
 	containerTag := viper.GetString("container-tag")
 
 	missingContainerConfig := containerRepo == "" || containerTag == ""
 	if missingContainerConfig {
-		slog.Info(
-			"Missing container config",
-			"container-repo", containerRepo,
-			"container-tag", containerTag,
+		return fmt.Errorf(
+			"missing required container config values: container-repo=%s, container-tag=%s",
+			containerRepo,
+			containerTag,
 		)
-		// TODO: Come up w/ a better logging strategy.
-		log.Fatalf("Missing container config")
 	}
 
 	var volumeMountArgs []string
@@ -47,13 +50,16 @@ func runCmdRun(_ *cobra.Command, _ []string) {
 	case "cwd":
 		cwdPath, err := os.Getwd()
 		if err != nil {
-			log.Fatal(err)
+			return fmt.Errorf("failed determining cwd: %w", err)
 		}
 
 		volumeMountArgs = []string{"-v", fmt.Sprintf("%s:%s", cwdPath, cwdPath)}
 		workingDir = cwdPath
 	default:
-		log.Fatalf("Invalid filesystemMount value:%s", filesystemMount)
+		return fmt.Errorf(
+			"invalid filesystemMount value: filesystem-mount=%s",
+			filesystemMount,
+		)
 	}
 
 	environmentVariables := viper.GetStringSlice("environment-variables")
@@ -86,9 +92,9 @@ func runCmdRun(_ *cobra.Command, _ []string) {
 		}...,
 	)
 
-	slog.Info(
+	logger.Debug(
 		"command-args",
-		"docker-run-args", dockerRunArgs,
+		slog.Any("docker-run-args", dockerRunArgs),
 	)
 
 	execCmd := exec.Command("docker", dockerRunArgs...)
@@ -96,10 +102,11 @@ func runCmdRun(_ *cobra.Command, _ []string) {
 	execCmd.Stdin = os.Stdin
 	execCmd.Stdout = os.Stdout
 
-	// TODO: How to do error handling in sub-commands...
 	if err := execCmd.Run(); err != nil {
-		log.Fatalf("%s", err)
+		return fmt.Errorf("running containerized toolbox-vim (via exec.Command().Run()) failed: %w", err)
 	}
+
+	return nil
 }
 
 func generateUniqueContainerName() string {

@@ -42,7 +42,7 @@ image_uri := "docker.io/mattjmcnaughton/toolbox-vim"
 version := "0.0.1"  # TODO: Update version to latest.
 image_name := image_uri + ":" + version
 cwd := `pwd`
-gopath := "{{cwd}}/.go"
+gopath := cwd + "/.go"
 
 dogfood: build
   GOPATH={{gopath}} ./{{binary_name}} run

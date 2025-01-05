@@ -2,11 +2,14 @@ package cmd
 
 import (
 	"fmt"
+	"log/slog"
 	"os"
 	"strings"
 
 	"github.com/spf13/cobra"
 	"github.com/spf13/viper"
+
+	"github.com/mattjmcnaughton/toolbox-vim/pkg/logging"
 )
 
 var cfgFile string
@@ -28,6 +31,10 @@ to quickly create a Cobra application.`,
 func Execute() {
 	err := rootCmd.Execute()
 	if err != nil {
+		logger := logging.NewRoot()
+
+		logger.Error("toolbox-vim failed", slog.String("error", fmt.Sprintf("%+v", err)))
+
 		os.Exit(1)
 	}
 }
@@ -67,6 +74,7 @@ func initConfig() {
 
 	// If a config file is found, read it in.
 	if err := viper.ReadInConfig(); err == nil {
+		// TODO: Update to use my standard logging library.
 		fmt.Fprintln(os.Stderr, "Using config file:", viper.ConfigFileUsed())
 	}
 
