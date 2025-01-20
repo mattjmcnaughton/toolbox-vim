@@ -10,7 +10,7 @@ import (
 	"github.com/spf13/cobra"
 	"github.com/spf13/viper"
 
-	"github.com/mattjmcnaughton/toolbox-vim/pkg/logging"
+	"github.com/mattjmcnaughton/toolbox-vim/internal/logging"
 )
 
 // runCmd represents the run command
@@ -19,7 +19,7 @@ var runCmd = &cobra.Command{
 	Short: "Run toolbox-vim!",
 	Long:  `Run a containerized vim based on the configuration values.`,
 	RunE: func(cmd *cobra.Command, args []string) error {
-		return runCmdRun(cmd, args, logging.NewCmd("run"))
+		return runCmdRun(cmd, args, logging.NewCmdLogger("run"))
 	},
 	SilenceUsage:  true,
 	SilenceErrors: true,

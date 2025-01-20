@@ -9,7 +9,7 @@ import (
 	"github.com/spf13/cobra"
 	"github.com/spf13/viper"
 
-	"github.com/mattjmcnaughton/toolbox-vim/pkg/logging"
+	"github.com/mattjmcnaughton/toolbox-vim/internal/logging"
 )
 
 var cfgFile string
@@ -31,7 +31,7 @@ to quickly create a Cobra application.`,
 func Execute() {
 	err := rootCmd.Execute()
 	if err != nil {
-		logger := logging.NewRoot()
+		logger := logging.NewRootLogger()
 
 		logger.Error("toolbox-vim failed", slog.String("error", fmt.Sprintf("%+v", err)))
 
